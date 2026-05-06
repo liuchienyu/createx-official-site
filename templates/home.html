@@ -4,34 +4,36 @@
 
 {% block content %}
 
-<section class="hero clean-hero">
-    <div class="hero-inner">
+<section class="hero">
+    <div class="hero-bg-layer"></div>
+
+    <div class="hero-content">
         <div class="hero-copy">
             <p class="eyebrow">創造娛樂工作室</p>
-            <h1>讓娛樂企劃，成為被記住的現場。</h1>
-            <p>
-                創造娛樂工作室專注於活動企劃、藝人合作、品牌內容與韓國娛樂合作，
-                以清楚的策略、穩定的執行與有記憶點的內容，協助品牌與藝人創造更好的連結。
+            <h1>創造娛樂<br>無限可能</h1>
+            <p class="hero-desc">
+                我們專注於活動企劃、藝人合作、品牌內容與韓國娛樂合作，
+                以完整企劃與現場執行，打造能被看見、被分享、被記住的娛樂體驗。
             </p>
 
             <div class="hero-actions">
-                <a class="btn primary" href="{{ url_for('business') }}">查看服務</a>
+                <a class="btn primary" href="{{ url_for('business') }}">了解服務</a>
                 <a class="btn ghost" href="{{ url_for('contact') }}">合作洽詢</a>
             </div>
         </div>
 
-        <div class="hero-panel">
-            <p>創造被記住的瞬間</p>
-            <h2>活動企劃 · 藝人合作 · 品牌內容 · 娛樂製作</h2>
-            <span>以台灣為起點，打造更有記憶點的娛樂企劃團隊。</span>
+        <div class="hero-card">
+            <span>核心方向</span>
+            <h2>活動 × 藝人 × 品牌 × 內容 × 韓國合作</h2>
+            <p>以台灣為起點，連結更多娛樂企劃與商務合作可能。</p>
         </div>
     </div>
 </section>
 
-<section class="section about-strip">
+<section class="section intro-band">
     <div>
         <p class="section-label">關於我們</p>
-        <h2>我們把企劃、現場、內容與合作整合成完整體驗。</h2>
+        <h2>我們不只是辦活動，而是創造完整的娛樂合作體驗。</h2>
     </div>
     <p>
         從一日店長、啦啦隊合作、品牌活動、韓國人才交流，到 Podcast 與短影音內容，
@@ -43,54 +45,54 @@
     <div class="section-head">
         <div>
             <p class="section-label">業務項目</p>
-            <h2>核心服務</h2>
+            <h2>我們的服務</h2>
         </div>
         <a class="text-link" href="{{ url_for('business') }}">查看全部</a>
     </div>
 
     <div class="service-list">
-        <a href="{{ url_for('business') }}" class="service-row">
+        <a class="service-row" href="{{ url_for('business') }}">
             <span>01</span>
             <h3>活動企劃與執行</h3>
-            <p>一日店長、品牌快閃、粉絲互動、實體活動流程規劃。</p>
+            <p>一日店長、品牌快閃、粉絲互動、實體活動流程規劃與現場執行。</p>
         </a>
 
-        <a href="{{ url_for('business') }}" class="service-row">
+        <a class="service-row" href="{{ url_for('business') }}">
             <span>02</span>
             <h3>藝人與人才合作</h3>
-            <p>啦啦隊女孩、KOL、主持人、韓國合作人才邀約與企劃。</p>
+            <p>藝人、啦啦隊、KOL、主持人、韓國合作人才邀約與企劃。</p>
         </a>
 
-        <a href="{{ url_for('business') }}" class="service-row">
+        <a class="service-row" href="{{ url_for('business') }}">
             <span>03</span>
             <h3>品牌內容製作</h3>
-            <p>社群貼文、短影音、活動紀錄、品牌宣傳內容規劃。</p>
+            <p>社群貼文、短影音、活動紀錄、品牌宣傳內容與視覺包裝。</p>
         </a>
 
-        <a href="{{ url_for('business') }}" class="service-row">
+        <a class="service-row" href="{{ url_for('business') }}">
             <span>04</span>
             <h3>韓國娛樂合作</h3>
-            <p>台韓活動合作、藝人交流、商務洽談與內容企劃。</p>
+            <p>台韓活動合作、藝人交流、啦啦隊合作、商務洽談與內容企劃。</p>
         </a>
     </div>
 </section>
 
-<section class="section feature-layout">
-    <div class="feature-copy">
+<section class="section talent-section">
+    <div class="talent-copy">
         <p class="section-label">合作藝人</p>
-        <h2>為品牌與現場找到適合的人才。</h2>
+        <h2>為品牌與活動找到合適的合作人才。</h2>
         <p>
             依照活動需求、品牌調性與受眾輪廓，媒合適合的藝人、啦啦隊、KOL 與合作人才。
         </p>
         <a class="btn primary" href="{{ url_for('artists') }}">查看合作藝人</a>
     </div>
 
-    <div class="artist-grid compact">
+    <div class="talent-grid">
         {% for artist in featured_artists %}
         <a class="artist-card" href="{{ url_for('artist_detail', slug=artist.slug) }}">
             <img src="{{ artist.image }}" alt="{{ artist.name_zh }}">
             <div>
-                <p>{{ artist.category }}</p>
+                <span>{{ artist.category }}</span>
                 <h3>{{ artist.name_zh }} {{ artist.name }}</h3>
             </div>
         </a>
@@ -110,11 +112,11 @@
     <div class="news-timeline">
         {% for item in latest_news %}
         <a class="timeline-item" href="{{ url_for('news_detail', slug=item.slug) }}">
-            <div class="timeline-date">
+            <div class="timeline-meta">
                 <span>{{ item.date }}</span>
                 <strong>{{ item.category }}</strong>
             </div>
-            <div>
+            <div class="timeline-content">
                 <h3>{{ item.title }}</h3>
                 <p>{{ item.summary }}</p>
             </div>
@@ -125,8 +127,8 @@
 
 <section class="cta-section">
     <p class="section-label">聯絡我們</p>
-    <h2>準備好一起創造下一個企劃了嗎？</h2>
-    <a class="btn primary" href="{{ url_for('contact') }}">合作洽詢</a>
+    <h2>準備好一起創造下一個娛樂企劃了嗎？</h2>
+    <a class="btn primary" href="{{ url_for('contact') }}">開始合作</a>
 </section>
 
 {% endblock %}
