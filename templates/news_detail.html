@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ news.title }}｜Createx{% endblock %}
+{% block title %}{{ news.title }}｜創造娛樂工作室{% endblock %}
 
 {% block content %}
 
@@ -18,7 +18,7 @@
         {{ news.content | replace('\n', '<br>') | safe }}
     </div>
 
-    <a class="btn ghost" href="{{ url_for('news') }}">返回消息列表</a>
+    <a class="btn outline" href="{{ url_for('news') }}">返回消息列表</a>
 </section>
 
 {% endblock %}

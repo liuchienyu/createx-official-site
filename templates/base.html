@@ -2,30 +2,34 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Createx 創造娛樂工作室{% endblock %}</title>
+    <title>{% block title %}創造娛樂工作室{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="Createx 創造娛樂工作室，專注於娛樂活動、藝人合作、品牌企劃、韓國娛樂合作與內容製作。">
-
+    <meta name="description" content="創造娛樂工作室，專注於娛樂活動、藝人合作、品牌企劃、韓國娛樂合作與內容製作。">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
 <header class="site-header">
-    <a href="{{ url_for('home') }}" class="brand">
-        <span class="brand-mark">C</span>
-        <span class="brand-text">Createx</span>
-    </a>
+    <div class="header-left">
+        <a href="{{ url_for('home') }}" class="brand">
+            <span class="brand-mark">創</span>
+            <span class="brand-text">創造娛樂工作室</span>
+        </a>
 
-    <nav class="nav">
-        <a href="{{ url_for('home') }}">HOME</a>
-        <a href="{{ url_for('about') }}">ABOUT</a>
-        <a href="{{ url_for('artists') }}">ARTISTS</a>
-        <a href="{{ url_for('business') }}">BUSINESS</a>
-        <a href="{{ url_for('news') }}">NEWS</a>
-        <a href="{{ url_for('shop') }}">SHOP</a>
-        <a href="{{ url_for('member') }}">MEMBER</a>
-        <a href="{{ url_for('contact') }}">CONTACT</a>
+        <nav class="nav nav-main">
+            <a href="{{ url_for('home') }}">首頁</a>
+            <a href="{{ url_for('about') }}">關於我們</a>
+            <a href="{{ url_for('artists') }}">合作藝人</a>
+            <a href="{{ url_for('business') }}">業務項目</a>
+            <a href="{{ url_for('news') }}">最新消息</a>
+            <a href="{{ url_for('contact') }}">聯絡我們</a>
+        </nav>
+    </div>
+
+    <nav class="nav nav-user">
+        <a href="{{ url_for('shop') }}">商城</a>
+        <a href="{{ url_for('login') }}">登入</a>
+        <a href="{{ url_for('member') }}" class="nav-contact">會員中心</a>
     </nav>
 </header>
 
@@ -35,17 +39,17 @@
 
 <footer class="footer">
     <div>
-        <h3>Createx 創造娛樂工作室</h3>
-        <p>Create the Moment, Connect the Stage.</p>
+        <h3>創造娛樂工作室</h3>
+        <p>創造每一個被記住的舞台。</p>
     </div>
 
     <div class="footer-links">
-        <a href="{{ url_for('about') }}">ABOUT</a>
-        <a href="{{ url_for('business') }}">BUSINESS</a>
-        <a href="{{ url_for('contact') }}">CONTACT</a>
+        <a href="{{ url_for('about') }}">關於我們</a>
+        <a href="{{ url_for('business') }}">業務項目</a>
+        <a href="{{ url_for('contact') }}">聯絡我們</a>
     </div>
 
-    <p class="copyright">© 2026 Createx Entertainment Studio. All Rights Reserved.</p>
+    <p class="copyright">© 2026 創造娛樂工作室. All Rights Reserved.</p>
 </footer>
 
 </body>
