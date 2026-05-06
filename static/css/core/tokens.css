@@ -1,0 +1,30 @@
+/* =========================================================
+   Createx | tokens.css
+   ========================================================= */
+:root {
+  --cx-purple: #7b6cff;
+  --cx-purple-2: #a855f7;
+
+  --cx-bg: #151526;
+  --cx-bg-2: #1b1b2f;
+  --cx-bg-3: #222240;
+
+  --cx-text: #ffffff;
+  --cx-muted: rgba(255,255,255,0.72);
+
+  --cx-light: #f5f6fb;
+  --cx-light-2: #ffffff;
+  --cx-light-text: #111827;
+  --cx-light-muted: #6b7280;
+
+  --cx-r-sm: 14px;
+  --cx-r-md: 18px;
+  --cx-r-lg: 26px;
+  --cx-r-pill: 999px;
+
+  --cx-shadow-soft: 0 14px 36px rgba(0,0,0,0.16);
+  --cx-shadow: 0 18px 60px rgba(0,0,0,0.28);
+  --cx-shadow-purple: 0 24px 70px rgba(123,108,255,0.22);
+
+  --cx-container: 1080px;
+}

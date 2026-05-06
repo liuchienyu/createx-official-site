@@ -1,0 +1,312 @@
+/* =========================================================
+   Createx | pages/artists.css  (FINAL)
+   Purpose:
+   - Artists list page only
+   - Premium / soft / consistent layout
+   - Fix broken image layout
+   - Fix card height + action alignment
+   ========================================================= */
+
+
+/* =========================================================
+   1) Hero
+   ========================================================= */
+.artist-list-hero {
+  padding: 92px 0 34px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(123,108,255,0.24), transparent 58%),
+    radial-gradient(circle at 82% 0%, rgba(168,85,247,0.20), transparent 58%),
+    linear-gradient(180deg, rgba(34,34,64,0.25), rgba(21,21,38,0.12));
+}
+
+.artist-list-hero-card {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 44px 26px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 18px 58px rgba(0,0,0,0.22);
+  text-align: center;
+}
+
+.artist-list-hero-card .text-muted {
+  color: rgba(255,255,255,0.72) !important;
+}
+
+/* Stats */
+.artist-list-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.artist-list-stats .stat {
+  min-width: 140px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.artist-list-stats .n {
+  font-weight: 900;
+  font-size: 1.12rem;
+  color: rgba(255,255,255,0.95);
+}
+
+.artist-list-stats .t {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.70);
+}
+
+
+/* =========================================================
+   2) Toolbar
+   ========================================================= */
+.artist-toolbar {
+  margin: 18px 0 12px;
+  display: grid;
+  grid-template-columns: 1.35fr 1.55fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+/* Search */
+.artist-search .form-control {
+  border-radius: 999px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+}
+
+.artist-search .form-control::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+
+.artist-search .form-control:focus {
+  outline: none;
+  border-color: rgba(168,85,247,0.32);
+  box-shadow: 0 0 0 3px rgba(168,85,247,0.16);
+}
+
+/* Pills */
+.artist-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cx-pill {
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.055);
+  color: rgba(255,255,255,0.86);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+
+.cx-pill:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.09);
+}
+
+.cx-pill.is-active {
+  background: linear-gradient(
+    135deg,
+    rgba(123,108,255,0.42),
+    rgba(168,85,247,0.28)
+  );
+  border-color: rgba(168,85,247,0.34);
+  color: #fff;
+}
+
+/* Toolbar actions */
+.artist-toolbar-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.artist-toolbar-actions .btn {
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   3) Artist Cards (CORE)
+   ========================================================= */
+.artist-item .cx-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+/* Media */
+.artist-item .cx-card-media {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+.artist-item .cx-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(168,85,247,0.18), transparent 55%);
+  pointer-events: none;
+}
+
+.artist-item .cx-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .35s ease, filter .35s ease;
+}
+
+.artist-item .cx-card:hover .cx-card-img {
+  transform: scale(1.06);
+  filter: brightness(1.05);
+}
+
+/* Card body layout */
+.artist-item .cx-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title */
+.artist-item .cx-card-title {
+  font-size: 1.04rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+/* Subtitle (2 lines clamp | future-proof) */
+.artist-item .cx-card-text {
+  color: rgba(255,255,255,0.82);
+  font-size: 0.92rem;
+  line-height: 1.7;
+
+  /* 保證卡片高度一致 */
+  min-height: calc(1.7em * 2);
+
+  /* Line clamp (current + future standard) */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;   /* Chrome / Safari / Edge */
+  line-clamp: 2;           /* 標準屬性（未來） */
+
+  overflow: hidden;
+}
+
+
+/* Meta */
+.artist-item .cx-mini-meta {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.10);
+  border: 1px solid rgba(255,255,255,0.10);
+  min-height: 92px;
+}
+
+.artist-item .cx-mini-meta .m {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 10px;
+}
+
+.artist-item .cx-mini-meta .k {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.70);
+}
+
+.artist-item .cx-mini-meta .v {
+  font-size: 0.90rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+}
+
+/* Tags */
+.artist-item .cx-card-tags {
+  margin-top: 12px;
+  min-height: 34px;
+}
+
+.artist-item .cx-card-tags .badge {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.92);
+}
+
+/* Action row (ALWAYS bottom aligned) */
+.artist-item .cx-card-action {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.80);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* =========================================================
+   4) Empty State
+   ========================================================= */
+.artist-empty {
+  padding: 42px 0 12px;
+}
+
+.cx-empty-card {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 30px 24px;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  text-align: center;
+}
+
+
+/* =========================================================
+   5) Responsive
+   ========================================================= */
+@media (max-width: 992px) {
+  .artist-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .artist-list-hero-card {
+    padding: 38px 18px;
+  }
+
+  .artist-list-stats .stat {
+    min-width: 46%;
+  }
+}
+
+/* Space between subtitle and meta block */
+.artist-item .cx-mini-meta {
+  margin-bottom: 10px;
+}
+
+.artist-item .cx-card-action {
+  padding-top: 2px;   /* 非必須，但更穩 */
+}

@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/artist_detail.css') }}">
+{% endblock %}
+
+{% block title %}
+{{ artist.name }}｜Createx 創造娛樂
+{% endblock %}
+
+{% block hero %}
+<section class="artist-hero">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="cx-breadcrumb">
+      <a href="{{ url_for('home') }}">首頁</a>
+      <span>/</span>
+      <a href="{{ url_for('artists') }}">藝人／啦啦隊</a>
+      <span>/</span>
+      <span class="is-current">{{ artist.name }}</span>
+    </div>
+
+    <div class="artist-hero-card">
+
+      <!-- Left: Avatar / Photo -->
+      <div class="artist-hero-media">
+        {% if artist.cover %}
+          <img src="{{ url_for('static', filename=artist.cover) }}" alt="{{ artist.name }}">
+        {% else %}
+          <div class="artist-media-placeholder">
+            <span>形象照（示意）</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right: Content -->
+      <div class="artist-hero-info">
+        <div class="artist-badges">
+          {% for t in artist.tags %}
+            <span class="badge rounded-pill">{{ t }}</span>
+          {% endfor %}
+        </div>
+
+        <h1 class="artist-name">{{ artist.name }}</h1>
+        <p class="artist-subtitle">{{ artist.subtitle }}</p>
+
+        <!-- Quick meta -->
+        <div class="artist-meta-grid">
+          <div class="artist-meta">
+            <div class="k">定位</div>
+            <div class="v">{{ artist.positioning }}</div>
+          </div>
+          <div class="artist-meta">
+            <div class="k">擅長</div>
+            <div class="v">{{ artist.strengths }}</div>
+          </div>
+          <div class="artist-meta">
+            <div class="k">活動類型</div>
+            <div class="v">{{ artist.event_types }}</div>
+          </div>
+          <div class="artist-meta">
+            <div class="k">語言</div>
+            <div class="v">{{ artist.languages }}</div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="artist-cta-row">
+          <a class="btn btn-cta-primary btn-lg" href="{{ url_for('business') }}">
+            品牌合作洽詢
+          </a>
+          <a class="btn btn-cta-secondary btn-lg" href="{{ url_for('contact') }}">
+            聯絡我們
+          </a>
+        </div>
+
+        <!-- Social (optional) -->
+        <div class="artist-social">
+          {% if artist.social.ig %}
+            <a class="cx-chip" href="{{ artist.social.ig }}" target="_blank" rel="noopener">Instagram</a>
+          {% endif %}
+          {% if artist.social.yt %}
+            <a class="cx-chip" href="{{ artist.social.yt }}" target="_blank" rel="noopener">YouTube</a>
+          {% endif %}
+          {% if artist.social.tt %}
+            <a class="cx-chip" href="{{ artist.social.tt }}" target="_blank" rel="noopener">TikTok</a>
+          {% endif %}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block body %}
+
+<!-- ========== About / Bio ========== -->
+<section class="section-light">
+  <div class="container">
+    <div class="section-head text-center mb-5">
+      <h2 class="fw-bold mb-2">關於 {{ artist.name }}</h2>
+      <p class="text-muted mb-0">品牌合作可提供完整素材與企劃建議</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="cx-surface">
+          <h5 class="fw-bold mb-3">個人簡介</h5>
+          <p class="cx-paragraph">
+            {{ artist.bio }}
+          </p>
+
+          <div class="cx-divider"></div>
+
+          <h5 class="fw-bold mb-3">合作亮點</h5>
+          <ul class="cx-list">
+            {% for p in artist.points %}
+              <li>{{ p }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="cx-surface">
+          <h5 class="fw-bold mb-3">基本資料</h5>
+
+          <div class="cx-kv">
+            <div class="k">身分</div>
+            <div class="v">{{ artist.role }}</div>
+          </div>
+          <div class="cx-kv">
+            <div class="k">地區</div>
+            <div class="v">{{ artist.region }}</div>
+          </div>
+          <div class="cx-kv">
+            <div class="k">合作類型</div>
+            <div class="v">{{ artist.collab_types }}</div>
+          </div>
+          <div class="cx-kv">
+            <div class="k">可配合</div>
+            <div class="v">{{ artist.available }}</div>
+          </div>
+
+          <div class="cx-divider"></div>
+
+          <a class="btn btn-cta-primary w-100" href="{{ url_for('contact') }}">立即洽詢</a>
+          <a class="btn btn-outline-dark w-100 mt-2" href="{{ url_for('artists') }}">回到列表</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ========== Gallery / Media ========== -->
+<section class="section-dark-soft">
+  <div class="container">
+    <div class="section-head d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+      <div>
+        <h2 class="fw-bold mb-2">形象與活動素材</h2>
+        <p class="text-muted mb-0">可放形象照、活動照、海報、影片縮圖（先示意）</p>
+      </div>
+      <div class="mt-3 mt-md-0">
+        <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-sm">索取完整媒體包</a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      {% for i in range(1,7) %}
+      <div class="col-6 col-md-4">
+        <div class="cx-media-tile">
+          <span>素材 {{ i }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ========== Case / CTA ========== -->
+<section class="section-light">
+  <div class="container">
+    <div class="cx-cta-panel text-center">
+      <h2 class="fw-bold mb-2">需要一個完整合作方案？</h2>
+      <p class="text-muted mb-4">
+        我們可以提供：活動企劃、票券設計、內容腳本、媒體曝光、現場執行與成效回報。
+      </p>
+
+      <div class="cx-cta-row cx-cta-row-wide">
+        <a href="{{ url_for('business') }}" class="btn btn-cta-primary btn-lg">查看合作方案</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-cta-tertiary btn-lg">聯絡我們</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+/* =========================================================
+   Createx | core/sections.css
+   Section-level layout & backgrounds
+   ========================================================= */
+
+
+/* =========================================================
+   1) Global Section Spacing
+   ========================================================= */
+section {
+  padding: 90px 0;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 70px 0;
+  }
+}
+
+
+/* =========================================================
+   2) Hero Section
+   ========================================================= */
+.hero {
+  min-height: 76vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  background:
+    radial-gradient(circle at top, rgba(123,108,255,0.28), transparent 58%),
+    linear-gradient(180deg, rgba(21,21,38,0.55), rgba(21,21,38,0.90)),
+    url("../../images/level_up_adv(n).png") center / cover no-repeat;
+}
+
+.hero-card {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 46px;
+
+  background: rgba(32, 32, 56, 0.66);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: var(--cx-r-lg);
+  border: 1px solid rgba(123,108,255,0.26);
+  box-shadow: var(--cx-shadow);
+}
+
+.hero-card .lead {
+  color: rgba(255,255,255,0.86);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 70vh;
+  }
+
+  .hero-card {
+    padding: 44px 24px;
+    border-radius: 20px;
+  }
+}
+
+
+/* =========================================================
+   3) Light Section (white background)
+   ========================================================= */
+.section-light {
+  background: linear-gradient(
+    180deg,
+    var(--cx-light),
+    var(--cx-light-2)
+  );
+  color: var(--cx-light-text);
+}
+
+.section-light .text-muted {
+  color: var(--cx-light-muted) !important;
+}
+
+
+/* =========================================================
+   4) Dark Soft Section (purple-black)
+   ========================================================= */
+.section-dark-soft {
+  background: linear-gradient(
+    180deg,
+    var(--cx-bg-3),
+    var(--cx-bg)
+  );
+}
+
+
+/* =========================================================
+   5) Section Head (titles / subtitles)
+   ========================================================= */
+.section-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-head h2 {
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.section-head p {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================================================
+   6) Utility Variants
+   ========================================================= */
+.section-tight {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.section-spacious {
+  padding-top: 110px;
+  padding-bottom: 110px;
+}

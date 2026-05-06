@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/artists.css') }}">
+{% endblock %}
+
+{% block title %}
+Createx 創造娛樂｜藝人／啦啦隊
+{% endblock %}
+
+{% block hero %}
+<section class="artist-list-hero">
+  <div class="container">
+    <div class="artist-list-hero-card">
+
+      <h1 class="fw-bold mb-2">藝人／啦啦隊</h1>
+      <p class="text-muted mb-4">
+        精選合作名單與可合作方向，讓品牌快速找到合適人選
+      </p>
+
+      <!-- Stats -->
+      <div class="artist-list-stats">
+        <div class="stat">
+          <div class="n">{{ artists|length }}</div>
+          <div class="t">可合作人選</div>
+        </div>
+        <div class="stat">
+          <div class="n">跨國</div>
+          <div class="t">資源整合</div>
+        </div>
+        <div class="stat">
+          <div class="n">活動</div>
+          <div class="t">可落地執行</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block body %}
+<section class="section-dark-soft pt-0">
+  <div class="container">
+
+    <!-- Toolbar -->
+    <div class="artist-toolbar mb-4">
+      <div class="artist-search">
+        <input id="artistSearch"
+               type="text"
+               class="form-control"
+               placeholder="搜尋：姓名 / 定位 / 標籤（例如：跨國、短影音、活動）"
+               autocomplete="off">
+      </div>
+
+      <div class="artist-filters">
+        <button class="cx-pill is-active" data-filter="all" type="button">全部</button>
+        <button class="cx-pill" data-filter="跨國" type="button">跨國</button>
+        <button class="cx-pill" data-filter="可商業化" type="button">可商業化</button>
+        <button class="cx-pill" data-filter="商業" type="button">商業</button>
+        <button class="cx-pill" data-filter="可活動" type="button">可活動</button>
+        <button class="cx-pill" data-filter="短影音" type="button">短影音</button>
+        <button class="cx-pill" data-filter="主持" type="button">主持</button>
+      </div>
+
+      <div class="artist-toolbar-actions">
+        <a href="{{ url_for('business') }}" class="btn btn-outline-light btn-sm">
+          查看方案
+        </a>
+        <a href="{{ url_for('contact') }}" class="btn btn-cta-primary btn-sm">
+          洽詢合作
+        </a>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="row g-4" id="artistGrid">
+
+      {% for a in artists %}
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3 artist-item"
+           data-name="{{ a.name }}"
+           data-subtitle="{{ a.subtitle }}"
+           data-tags="{{ (a.tags|join(' ')) if a.tags else '' }}"
+           data-positioning="{{ a.positioning }}">
+
+        <a class="cx-card cx-card-link h-100"
+           href="{{ url_for('artist_detail', slug=a.slug) }}"
+           aria-label="View {{ a.name }}">
+
+          <!-- Media (Image first, fallback placeholder; no layout break) -->
+          <div class="cx-card-media">
+            {% if a.cover %}
+              <img class="cx-card-img"
+                   src="{{ url_for('static', filename=a.cover) }}"
+                   alt="{{ a.name }}"
+                   loading="lazy"
+                   onerror="this.style.display='none'; this.closest('.cx-card-media').querySelector('.cx-ph').style.display='grid';">
+              <div class="cx-ph" style="display:none;">
+                <div class="cx-ph-badge">Createx</div>
+                <div class="cx-ph-initial">{{ a.name[:1] }}</div>
+                <div class="cx-ph-name">{{ a.name }}</div>
+                <div class="cx-ph-sub">{{ a.positioning }}</div>
+              </div>
+            {% else %}
+              <div class="cx-ph">
+                <div class="cx-ph-badge">Createx</div>
+                <div class="cx-ph-initial">{{ a.name[:1] }}</div>
+                <div class="cx-ph-name">{{ a.name }}</div>
+                <div class="cx-ph-sub">{{ a.positioning }}</div>
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="cx-card-body">
+            <div class="cx-card-title">{{ a.name }}</div>
+            <div class="cx-card-text">{{ a.subtitle }}</div>
+
+            <!-- Meta -->
+            <div class="cx-mini-meta mt-3">
+              <div class="m">
+                <span class="k">定位</span>
+                <span class="v">{{ a.positioning }}</span>
+              </div>
+              <div class="m">
+                <span class="k">擅長</span>
+                <span class="v">{{ a.strengths }}</span>
+              </div>
+            </div>
+            <div class="cx-card-action">
+              <span>查看個人頁</span>
+              <span class="cx-arrow">→</span>
+            </div>
+          </div>
+
+        </a>
+      </div>
+      {% endfor %}
+
+    </div>
+
+    <!-- Empty -->
+    <div id="artistEmpty" class="artist-empty" style="display:none;">
+      <div class="cx-empty-card">
+        <h5 class="fw-bold mb-2">找不到符合條件的人選</h5>
+        <p class="text-muted mb-4">請調整關鍵字或篩選條件。</p>
+        <button class="btn btn-outline-light btn-sm" id="resetFilters" type="button">清除篩選</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="section-light">
+  <div class="container">
+    <div class="cx-cta-panel text-center">
+      <h2 class="fw-bold mb-2">需要我們直接幫你配對人選？</h2>
+      <p class="text-muted mb-4">
+        提供活動需求與品牌調性，我們會給你最合適的合作名單。
+      </p>
+      <div class="cx-cta-row cx-cta-row-wide">
+        <a href="{{ url_for('contact') }}" class="btn btn-cta-primary btn-lg">聯絡我們</a>
+        <a href="{{ url_for('business') }}" class="btn btn-cta-tertiary btn-lg">查看合作方案</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  const search = document.getElementById('artistSearch');
+  const pills = document.querySelectorAll('.cx-pill');
+  const items = Array.from(document.querySelectorAll('.artist-item'));
+  const empty = document.getElementById('artistEmpty');
+  const resetBtn = document.getElementById('resetFilters');
+
+  let activeFilter = 'all';
+
+  function normalize(s) {
+    return (s || '').toString().trim().toLowerCase();
+  }
+
+  function tagMatch(tags, filter) {
+    if (filter === 'all') return true;
+
+    const f = normalize(filter);
+
+    // 同義支援：商業 <-> 可商業化
+    if (f === '商業') return tags.includes('商業') || tags.includes('可商業化');
+    if (f === '可商業化') return tags.includes('可商業化') || tags.includes('商業');
+
+    return tags.includes(f);
+  }
+
+  function apply() {
+    const q = normalize(search?.value);
+    let shown = 0;
+
+    items.forEach(el => {
+      const name = normalize(el.dataset.name);
+      const subtitle = normalize(el.dataset.subtitle);
+      const tags = normalize(el.dataset.tags);
+      const positioning = normalize(el.dataset.positioning);
+
+      const matchText =
+        !q ||
+        name.includes(q) ||
+        subtitle.includes(q) ||
+        tags.includes(q) ||
+        positioning.includes(q);
+
+      const matchTag = tagMatch(tags, activeFilter);
+      const ok = matchText && matchTag;
+
+      el.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+
+    if (empty) empty.style.display = shown === 0 ? 'block' : 'none';
+  }
+
+  pills.forEach(p => {
+    p.addEventListener('click', () => {
+      pills.forEach(x => x.classList.remove('is-active'));
+      p.classList.add('is-active');
+      activeFilter = p.dataset.filter || 'all';
+      apply();
+    });
+  });
+
+  if (search) search.addEventListener('input', apply);
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (search) search.value = '';
+      activeFilter = 'all';
+      pills.forEach(x => x.classList.remove('is-active'));
+      const first = document.querySelector('.cx-pill[data-filter="all"]');
+      if (first) first.classList.add('is-active');
+      apply();
+    });
+  }
+
+  apply();
+})();
+</script>
+{% endblock %}

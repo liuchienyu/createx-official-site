@@ -1,38 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Createx 創造娛樂工作室{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}Createx 創造娛樂｜官方網站{% endblock %}</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Core CSS (Global) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core/tokens.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core/layout.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core/sections.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core/components.css') }}">
+
+  <!-- Page CSS (Optional) -->
+  {% block page_css %}{% endblock %}
+
+  <!-- Legacy extra css hook (Optional) -->
+  {% block extra_css %}{% endblock %}
 </head>
+
 <body>
 
-<header class="site-header">
-    <a href="{{ url_for('index') }}" class="brand">
-        <span class="brand-mark">C</span>
-        <span>Createx</span>
+ <header class="site-header sticky-top" id="siteHeader">
+  <nav class="navbar navbar-expand-md container">
+
+    <!-- Logo -->
+    <a href="{{ url_for('home') }}"
+       class="navbar-brand logo-wrap d-flex align-items-center"
+       aria-label="Createx Home">
+      <img src="{{ url_for('static', filename='images/logo_w_2.png') }}" alt="Createx">
     </a>
 
-    <nav class="nav">
-        <a href="{{ url_for('index') }}">HOME</a>
-        <a href="{{ url_for('about') }}">ABOUT</a>
-        <a href="{{ url_for('events') }}">EVENTS</a>
-        <a href="{{ url_for('contact') }}">CONTACT</a>
-    </nav>
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler btn btn-outline-light btn-sm"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+            aria-controls="mainNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      ☰
+    </button>
+
+    <!-- ONE menu container -->
+    <div class="collapse navbar-collapse" id="mainNav">
+      <div class="nav-wrap ms-auto">
+
+        <!-- 主選單 -->
+        <div class="nav-main nav-links navbar-nav align-items-md-center">
+          <a class="nav-link {% if request.endpoint=='home' %}is-active{% endif %}"
+             href="{{ url_for('home') }}">首頁</a>
+
+          <a class="nav-link {% if request.endpoint=='news' %}is-active{% endif %}"
+             href="{{ url_for('news') }}">最新消息</a>
+
+          <a class="nav-link {% if request.endpoint=='about' %}is-active{% endif %}"
+             href="{{ url_for('about') }}">關於我們</a>
+
+          <a class="nav-link {% if request.endpoint=='artists' %}is-active{% endif %}"
+             href="{{ url_for('artists') }}">藝人／啦啦隊</a>
+
+          <a class="nav-link {% if request.endpoint=='business' %}is-active{% endif %}"
+             href="{{ url_for('business') }}">商業合作</a>
+        </div>
+
+        <!-- 右側功能區：商城/會員 + CTA -->
+        <div class="nav-actions nav-links navbar-nav align-items-md-center">
+
+          <a class="nav-link nav-util {% if request.endpoint=='shop' %}is-active{% endif %}"
+             href="{{ url_for('shop') }}">
+            商城
+            <span class="nav-badge">NEW</span>
+          </a>
+
+          <a class="nav-link nav-util nav-member {% if request.endpoint in ['login','member'] %}is-active{% endif %}"
+             href="{{ url_for('login') }}">
+            會員
+          </a>
+
+          <a class="btn btn-outline-light btn-sm nav-cta {% if request.endpoint=='contact' %}btn-active{% endif %}"
+             href="{{ url_for('contact') }}">
+            聯絡我們
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+  </nav>
 </header>
 
-<main>
-    {% block content %}{% endblock %}
+
+{% block hero %}{% endblock %}
+
+<main id="main-content">
+  {% block body %}{% endblock %}
 </main>
 
-<footer class="footer">
-    <div>
-        <strong>Createx 創造娛樂工作室</strong>
-        <p>Create the Moment, Connect the Stage.</p>
-    </div>
-    <p>© 2026 Createx Entertainment Studio. All Rights Reserved.</p>
+<footer class="py-5">
+  <div class="container text-center">
+    <img src="{{ url_for('static', filename='images/logo_w_2.png') }}"
+         style="height:36px;width:auto;"
+         alt="Createx">
+    <p class="mt-3 mb-1 fw-bold">Createx 創造娛樂工作室</p>
+    <small>跨國娛樂經紀 × 活動製作 × 商業整合</small><br>
+    <small>© 2026 Createx Entertainment. All Rights Reserved.</small>
+  </div>
 </footer>
 
+  <!-- Bootstrap JS -->
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  {% block extra_js %}{% endblock %}
 </body>
 </html>

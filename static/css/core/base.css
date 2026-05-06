@@ -1,0 +1,19 @@
+/* =========================================================
+   Createx | base.css
+   Global / Typography / Helpers
+   ========================================================= */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  font-family: "Noto Sans TC", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, var(--cx-bg), var(--cx-bg-2));
+  color: var(--cx-text);
+  letter-spacing: 0.2px;
+}
+
+a { text-decoration: none !important; color: inherit; }
+
+.container { max-width: var(--cx-container); }
+
+.text-muted { color: var(--cx-muted) !important; }
