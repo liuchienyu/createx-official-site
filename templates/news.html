@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}最新消息｜Createx{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <p class="eyebrow">NEWS</p>
+    <h1>最新消息</h1>
+</section>
+
+<section class="section">
+    <div class="news-grid">
+        {% for item in news_list %}
+        <a class="news-card" href="{{ url_for('news_detail', slug=item.slug) }}">
+            <img src="{{ item.cover }}" alt="{{ item.title }}">
+            <div>
+                <p>{{ item.date }} / {{ item.category }}</p>
+                <h3>{{ item.title }}</h3>
+                <span>{{ item.summary }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

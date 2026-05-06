@@ -1,17 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}{{ page_title }}｜Createx{% endblock %}
+{% block title %}頁面不存在｜Createx{% endblock %}
 
 {% block content %}
 
 <section class="page-hero">
-    <p class="eyebrow">COMING SOON</p>
-    <h1>{{ page_title }}</h1>
+    <p class="eyebrow">404</p>
+    <h1>頁面不存在</h1>
 </section>
 
 <section class="section narrow">
-    <h2>功能準備中</h2>
-    <p>{{ page_desc }}</p>
+    <p>你要找的頁面不存在，可能已被移除或網址輸入錯誤。</p>
     <a class="btn primary" href="{{ url_for('home') }}">返回首頁</a>
 </section>
 

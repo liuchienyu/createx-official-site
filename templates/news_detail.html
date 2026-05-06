@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ news.title }}｜Createx{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <p class="eyebrow">{{ news.date }} / {{ news.category }}</p>
+    <h1>{{ news.title }}</h1>
+</section>
+
+<section class="section narrow">
+    <img class="detail-cover" src="{{ news.cover }}" alt="{{ news.title }}">
+
+    <p class="lead">{{ news.summary }}</p>
+
+    <div class="article-content">
+        {{ news.content | replace('\n', '<br>') | safe }}
+    </div>
+
+    <a class="btn ghost" href="{{ url_for('news') }}">返回消息列表</a>
+</section>
+
+{% endblock %}
