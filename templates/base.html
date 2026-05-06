@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Createx 創造娛樂工作室{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="site-header">
+    <a href="{{ url_for('index') }}" class="brand">
+        <span class="brand-mark">C</span>
+        <span>Createx</span>
+    </a>
+
+    <nav class="nav">
+        <a href="{{ url_for('index') }}">HOME</a>
+        <a href="{{ url_for('about') }}">ABOUT</a>
+        <a href="{{ url_for('events') }}">EVENTS</a>
+        <a href="{{ url_for('contact') }}">CONTACT</a>
+    </nav>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div>
+        <strong>Createx 創造娛樂工作室</strong>
+        <p>Create the Moment, Connect the Stage.</p>
+    </div>
+    <p>© 2026 Createx Entertainment Studio. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
